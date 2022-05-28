@@ -8,10 +8,16 @@ const app = express();
 
 const tasks = require("./routes/tasks");
 
+const notFound = require("./middleware/not-found");
+
+app.use(express.static("./public"));
+
 //middleware
 app.use(express.json());
 
 app.use("/api/v1/tasks", tasks);
+
+app.use(notFound);
 
 const port = 3000;
 
