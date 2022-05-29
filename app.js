@@ -10,6 +10,8 @@ const tasks = require("./routes/tasks");
 
 const notFound = require("./middleware/not-found");
 
+const errorHandlerMiddleware = require("./middleware/error-handler");
+
 app.use(express.static("./public"));
 
 //middleware
@@ -19,7 +21,9 @@ app.use("/api/v1/tasks", tasks);
 
 app.use(notFound);
 
-const port = 3000;
+app.use(errorHandlerMiddleware);
+
+const port = process.env.PORT || 6000;
 
 const start = async () => {
   try {
